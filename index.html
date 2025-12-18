@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMINA | Premium Eyewear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">LUMINA.</div>
+        <ul class="nav-links">
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#feedback">Stories</a></li>
+        </ul>
+        <div class="nav-icons">
+            <div class="cart-trigger" onclick="toggleCart()">
+                Bag (<span id="cart-count">0</span>)
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Vision Crafted<br>For the Bold.</h1>
+            <p>Acetate frames and precision lenses for the modern era.</p>
+            <a href="#shop" class="btn-main">Shop All</a>
+        </div>
+    </header>
+
+    <section id="collections" class="category-banner-section">
+        <div class="category-card" onclick="filterByClick('men')">
+            <img src="https://images.unsplash.com/photo-1483726234545-481d6e880fc6?q=80&w=2070&auto=format&fit=crop" alt="Men">
+            <div class="cat-overlay">
+                <h3>Men</h3>
+                <span>View Collection</span>
+            </div>
+        </div>
+        <div class="category-card" onclick="filterByClick('women')">
+            <img src="https://images.unsplash.com/photo-1614715838608-dd527c46231d?q=80&w=1974&auto=format&fit=crop" alt="Women">
+            <div class="cat-overlay">
+                <h3>Women</h3>
+                <span>View Collection</span>
+            </div>
+        </div>
+        <div class="category-card" onclick="filterByClick('lens')">
+            <img src="https://images.unsplash.com/photo-1589708670846-9b578c7c9a47?q=80&w=2070&auto=format&fit=crop" alt="Lenses">
+            <div class="cat-overlay">
+                <h3>Lenses</h3>
+                <span>Shop Contacts</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="product-section">
+        <div class="section-header">
+            <h2>The Catalogue</h2>
+            <div class="filter-tabs">
+                <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+                <button class="filter-btn" onclick="filterProducts('men', this)">Men</button>
+                <button class="filter-btn" onclick="filterProducts('women', this)">Women</button>
+                <button class="filter-btn" onclick="filterProducts('lens', this)">Lenses</button>
+            </div>
+        </div>
+        
+        <div class="product-grid" id="product-grid">
+            </div>
+    </section>
+
+    <section id="feedback" class="feedback-section">
+        <div class="feedback-container">
+            <h2>Client Stories</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The contact lenses are so breathable I forget I'm wearing them."</p>
+                    <h4>— Sarah J.</h4>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The men's collection fits perfectly. Premium build quality."</p>
+                    <h4>— Arjun K.</h4>
+                </div>
+            </div>
+
+            <div class="feedback-form-wrapper">
+                <h3>Leave a Note</h3>
+                <form id="feedback-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <textarea placeholder="Tell us about your experience..." rows="3" required></textarea>
+                    <button type="submit" class="btn-secondary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>LUMINA.</h3>
+            </div>
+            <div class="footer-col">
+                <p>&copy; 2025 Lumina Eyewear.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Selection</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+            <button class="btn-checkout" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
