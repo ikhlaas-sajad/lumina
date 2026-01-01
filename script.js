@@ -208,5 +208,75 @@ document.getElementById('feedback-form').addEventListener('submit', function(e) 
     alert("Thank you! Your feedback has been downloaded.");
     this.reset();
 });
+// --- NEW COUPON LOGIC ---
 
+// Available coupons
+const coupons = {
+    "SAVE10": 0.10, // 10% off
+    "LUMINA20": 0.20, // 20% off
+    "WELCOME50": 0.50 // 50% off
+};
+
+let appliedDiscount = 0; // Stores the current discount percentage (e.g., 0.10)
+
+function applyCoupon() {
+    const input = document.getElementById('coupon-input');
+    const msg = document.getElementById('coupon-msg');
+    const code = input.value.toUpperCase().trim();
+
+    if (coupons[code]) {
+        appliedDiscount = coupons[code];
+        msg.textContent = `Success! ${code} applied.`;
+        msg.style.color = "green";
+    } else {
+        appliedDiscount = 0;
+        msg.textContent = "Invalid coupon code.";
+        msg.style.color = "red";
+    }
+    
+    // Recalculate totals immediately
+    updateCart();
+}
+
+// --- UPDATED CART LOGIC (With Math) ---
+
+function updateCart() {
+    // 1. Update Cart Count bubble
+    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCountEl.textContent = totalCount;
+
+    // 2. Render Items
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-msg" style="text-align:center; margin-top:2rem;">Your bag is empty.</p>';
+        // Reset discount if empty
+        appliedDiscount = 0; 
+        document.getElementById('coupon-msg').textContent = "";
+        document.getElementById('coupon-input').value = "";
+    } else {
+        cartItemsContainer.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <img src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/100x100?text=Icon'">
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <p>₹${item.price.toLocaleString()}</p>
+                    <div class="qty-controls">
+                        <button class="btn-qty" onclick="changeQty(${item.id}, -1)">-</button>
+                        <span class="qty-text">${item.quantity}</span>
+                        <button class="btn-qty" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // 3. Calculate Math
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const discountAmount = subtotal * appliedDiscount;
+    const finalTotal = subtotal - discountAmount;
+
+    // 4. Update HTML Elements
+    document.getElementById('cart-subtotal').textContent = '₹' + subtotal.toLocaleString();
+    document.getElementById('cart-discount').textContent = '- ₹' + discountAmount.toLocaleString();
+    cartTotalEl.textContent = '₹' + finalTotal.toLocaleString();
+}
 init();

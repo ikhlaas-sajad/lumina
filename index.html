@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,45 +9,9 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Hover effects moved to Internal CSS */
-        .category-card:hover img { transform: scale(1.1); }
-        .product-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-5px); }
-        .product-card:hover img { transform: scale(1.08); }
-        
-        /* Filter Button Styles */
-        .filter-tabs { margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; }
-        .filter-btn {
-            background: none; border: none; font-size: 1rem; cursor: pointer;
-            font-family: 'Jost', sans-serif; padding-bottom: 5px; color: #888;
-            transition: color 0.3s ease;
-        }
-        .filter-btn.active, .filter-btn:hover { color: #000; border-bottom: 2px solid #d4af37; }
-
-        /* Cart Animations */
+        /* Animation logic for the cart overlay */
         .cart-overlay.active { display: block; animation: fadeIn 0.3s forwards; }
-        .cart-sidebar.open { right: 0; }
-        
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Form Styling */
-        .feedback-form-wrapper input, .feedback-form-wrapper textarea {
-            width: 100%; max-width: 500px; padding: 1rem; margin-bottom: 1rem;
-            background: #222; border: 1px solid #333; color: #fff;
-            font-family: 'Jost', sans-serif;
-        }
-        .btn-secondary {
-            padding: 1rem 3rem; background: #d4af37; border: none; font-weight: 600; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        .btn-secondary:hover { background: #fff; color: #000; transition: 0.3s; }
-        
-        /* Cart Quantity Buttons */
-        .btn-qty {
-            width: 25px; height: 25px; background: #eee; border: none; cursor: pointer;
-            font-weight: bold; display: flex; align-items: center; justify-content: center;
-        }
-        .btn-qty:hover { background: #d4af37; color: white; }
-        .btn-add:hover { background: #000; color: #fff; }
     </style>
 </head>
 <body>
@@ -61,8 +26,7 @@
         </ul>
         
         <div class="nav-icons">
-            <div class="cart-trigger" onclick="toggleCart()" 
-                 style="cursor: pointer; font-weight: 600; font-size: 0.9rem; border: 1px solid #000; padding: 8px 15px; border-radius: 20px;">
+            <div class="cart-trigger" onclick="toggleCart()">
                 Bag (<span id="cart-count">0</span>)
             </div>
         </div>
@@ -70,16 +34,9 @@
 
     <header class="hero">
         <div class="hero-content">
-            <h1 style="font-size: 3.5rem; margin-bottom: 1rem; color: #111; line-height: 1.1;">
-                Vision Crafted<br>For the Bold.
-            </h1>
-            <p style="margin-bottom: 2rem; color: #555; font-size: 1.1rem;">
-                Acetate frames and precision lenses for the modern era.
-            </p>
-            <a href="#shop" class="btn-main" 
-               style="padding: 1rem 2.5rem; background: #000; color: #fff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; display: inline-block;">
-               Shop All
-            </a>
+            <h1>Vision Crafted<br>For the Bold.</h1>
+            <p>Acetate frames and precision lenses for the modern era.</p>
+            <a href="#shop" class="btn-main">Shop All</a>
         </div>
     </header>
 
@@ -106,9 +63,10 @@
             </div>
         </div>
     </section>
+
     <section id="shop" class="product-section">
-        <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-            <h2 style="font-size: 2.5rem;">The Catalogue</h2>
+        <div class="section-header">
+            <h2>The Catalogue</h2>
             <div class="filter-tabs">
                 <button class="filter-btn active" onclick="renderProducts('all', this)">All</button>
                 <button class="filter-btn" onclick="renderProducts('men', this)">Men</button>
@@ -119,20 +77,20 @@
         <div class="product-grid" id="product-grid"></div>
     </section>
 
-    <section id="feedback" class="feedback-section" style="background: #111; color: #fff; padding: 5rem 5%; text-align: center;">
+    <section id="feedback" class="feedback-section">
         <div class="feedback-container">
-            <h2 style="color: #d4af37;">Client Stories</h2>
+            <h2>Client Stories</h2>
             
-            <div class="reviews-grid" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin: 3rem 0;">
-                <div class="review-card" style="background: #1a1a1a; padding: 2rem; max-width: 400px; text-align: left; border-left: 3px solid #d4af37;">
-                    <div class="stars" style="color: #d4af37; margin-bottom: 1rem;">★★★★★</div>
-                    <p style="font-style: italic; color: #ccc;">"The contact lenses are so breathable I forget I'm wearing them."</p>
-                    <h4 style="text-transform: uppercase; margin-top: 1rem;">— Sarah J.</h4>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The contact lenses are so breathable I forget I'm wearing them."</p>
+                    <h4>— Sarah J.</h4>
                 </div>
-                <div class="review-card" style="background: #1a1a1a; padding: 2rem; max-width: 400px; text-align: left; border-left: 3px solid #d4af37;">
-                    <div class="stars" style="color: #d4af37; margin-bottom: 1rem;">★★★★★</div>
-                    <p style="font-style: italic; color: #ccc;">"The men's collection fits perfectly. Premium build quality."</p>
-                    <h4 style="text-transform: uppercase; margin-top: 1rem;">— Arjun K.</h4>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The men's collection fits perfectly. Premium build quality."</p>
+                    <h4>— Arjun K.</h4>
                 </div>
             </div>
 
@@ -148,7 +106,7 @@
     </section>
 
     <footer>
-        <div class="footer-content" style="width: 100%; display: flex; justify-content: space-between;">
+        <div class="footer-content">
             <div class="footer-col">
                 <h3>LUMINA.</h3>
             </div>
@@ -160,19 +118,30 @@
 
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
     <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header" style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+        <div class="cart-header">
             <h3>Your Selection</h3>
-            <button class="close-cart" onclick="toggleCart()" style="background: none; border: none; font-size: 2rem; cursor: pointer;">&times;</button>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
         </div>
         <div class="cart-items" id="cart-items"></div>
         
-        <div class="cart-footer" style="padding-top: 1rem; border-top: 2px solid #000;">
-            <div class="total-row" style="display: flex; justify-content: space-between; font-size: 1.2rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem;">
+        <div class="cart-footer">
+            <div class="coupon-section">
+                <input type="text" id="coupon-input" placeholder="Promo Code">
+                <button onclick="applyCoupon()">Apply</button>
+            </div>
+            <p id="coupon-msg"></p>
+
+            <div class="summary-row">
+                <span>Subtotal</span><span id="cart-subtotal">₹0</span>
+            </div>
+            <div class="summary-row discount-text">
+                <span>Discount</span><span id="cart-discount">- ₹0</span>
+            </div>
+            <div class="total-row">
                 <span>Total</span><span id="cart-total">₹0</span>
             </div>
-            <button class="btn-checkout" onclick="checkout()" style="width: 100%; padding: 1rem; background: #000; color: #fff; border: none; text-transform: uppercase; cursor: pointer;">
-                Proceed to Checkout
-            </button>
+
+            <button class="btn-checkout" onclick="checkout()">Proceed to Checkout</button>
         </div>
     </div>
 
@@ -180,4 +149,4 @@
 </body>
 </html>
 
- 
+   
