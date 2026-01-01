@@ -94,15 +94,19 @@
                 </div>
             </div>
 
-            <div class="feedback-form-wrapper">
-                <h3>Leave a Note</h3>
-                <form id="feedback-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <textarea placeholder="Tell us about your experience..." rows="3" required></textarea>
-                    <button type="submit" class="btn-secondary">Submit & Download</button>
-                </form>
-            </div>
-        </div>
+        <div class="feedback-form-wrapper">
+    <h3>Leave a Note</h3>
+    <form id="feedback-form">
+        <input type="text" id="fb-name" placeholder="Your Name" required>
+        
+        <input type="email" id="fb-email" placeholder="Your Email" required>
+        <input type="tel" id="fb-phone" placeholder="Phone Number (10 digits)" required>
+        
+        <textarea id="fb-msg" placeholder="Tell us about your experience..." rows="3" required></textarea>
+        
+        <button type="submit" class="btn-secondary">Submit & Download</button>
+    </form>
+</div>
     </section>
 
     <footer>

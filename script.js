@@ -44,7 +44,8 @@ const products = [
         price: 1200, 
         // Image: Lens solution bottles
         img: "https://images.pexels.com/photos/5996656/pexels-photo-5996656.jpeg?auto=compress&cs=tinysrgb&w=600" 
-    }
+    },
+
 ];
 
 
@@ -183,16 +184,46 @@ function checkout() {
     }
 }
 
-// --- FEEDBACK LOGIC ---
+// --- 7. FEEDBACK VALIDATION & DOWNLOAD LOGIC ---
 document.getElementById('feedback-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const name = this.querySelector('input').value;
-    const message = this.querySelector('textarea').value;
+    // 1. Get Values by ID
+    const name = document.getElementById('fb-name').value;
+    const email = document.getElementById('fb-email').value;
+    const phone = document.getElementById('fb-phone').value;
+    const message = document.getElementById('fb-msg').value;
+
+    // 2. Validation Logic
+    // Simple Email Regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Phone Regex (Exactly 10 digits)
+    const phoneRegex = /^\d{10}$/;
+
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address (e.g., user@example.com).");
+        return; // Stop execution
+    }
+
+    if (!phoneRegex.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return; // Stop execution
+    }
+
+    // 3. Create File Content
     const date = new Date().toLocaleString();
+    const fileContent = `LUMINA EYEWEAR FEEDBACK
+-----------------------
+Date: ${date}
+Customer Name: ${name}
+Email: ${email}
+Phone: ${phone}
 
-    const fileContent = `LUMINA EYEWEAR FEEDBACK\n-----------------------\nDate: ${date}\nCustomer Name: ${name}\n\nFeedback:\n${message}\n-----------------------`;
+Feedback:
+${message}
+-----------------------`;
 
+    // 4. Download Logic
     const blob = new Blob([fileContent], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
 
@@ -205,7 +236,7 @@ document.getElementById('feedback-form').addEventListener('submit', function(e) 
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    alert("Thank you! Your feedback has been downloaded.");
+    alert("Thank you! Your feedback has been recorded and downloaded.");
     this.reset();
 });
 // --- NEW COUPON LOGIC ---
